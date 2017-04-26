@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Authors>Yamal</Authors>
+    <Company>Yamal</Company>
+    <Product>CMAS</Product>
+    <Description>Users Module</Description>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <AssemblyName>Cmas.BusinessLayers.Users</AssemblyName>
+    <RootNamespace>Cmas.BusinessLayers.Users</RootNamespace>
+    <PackageId>Cmas.BusinessLayers.Users</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Dtos\**" />
+    <Compile Remove="Forms\**" />
+    <EmbeddedResource Remove="Dtos\**" />
+    <EmbeddedResource Remove="Forms\**" />
+    <None Remove="Dtos\**" />
+    <None Remove="Forms\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Cmas.Infrastructure.Domain" Version="*" />
+    <PackageReference Include="Nancy" Version="2.0.0-clinteastwood" />
+    <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CommandsContexts\" />
+  </ItemGroup>
+
+</Project>
