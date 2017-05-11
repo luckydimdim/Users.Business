@@ -1,4 +1,6 @@
-﻿using Cmas.BusinessLayers.Users.Criteria;
+﻿using System;
+using System.Security.Claims;
+using Cmas.BusinessLayers.Users.Criteria;
 using Cmas.BusinessLayers.Users.Entities;
 using Cmas.Infrastructure.Domain.Commands;
 using Cmas.Infrastructure.Domain.Queries;
@@ -10,11 +12,13 @@ namespace Cmas.BusinessLayers.Users
     {
         private readonly ICommandBuilder _commandBuilder;
         private readonly IQueryBuilder _queryBuilder;
+        private readonly ClaimsPrincipal _claimsPrincipal;
 
-        public UsersBusinessLayer(ICommandBuilder commandBuilder, IQueryBuilder queryBuilder)
+        public UsersBusinessLayer(IServiceProvider serviceProvider, ClaimsPrincipal claimsPrincipal)
         {
-            _commandBuilder = commandBuilder;
-            _queryBuilder = queryBuilder;
+            _claimsPrincipal = claimsPrincipal;
+            _commandBuilder = (ICommandBuilder)serviceProvider.GetService(typeof(ICommandBuilder));
+            _queryBuilder = (IQueryBuilder)serviceProvider.GetService(typeof(IQueryBuilder));
         }
 
         public async Task<User> GetUser(string login)
