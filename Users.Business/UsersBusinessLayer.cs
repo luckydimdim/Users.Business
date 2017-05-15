@@ -5,6 +5,7 @@ using Cmas.BusinessLayers.Users.Entities;
 using Cmas.Infrastructure.Domain.Commands;
 using Cmas.Infrastructure.Domain.Queries;
 using System.Threading.Tasks;
+using Cmas.BusinessLayers.Users.CommandsContexts;
 
 namespace Cmas.BusinessLayers.Users
 {
@@ -28,5 +29,20 @@ namespace Cmas.BusinessLayers.Users
 
             return await _queryBuilder.For<Task<User>>().With(new FindByLogin(login));
         }
+
+        public async Task<string> UpdateUser(User user)
+        {
+            user.UpdatedAt = DateTime.UtcNow;
+
+            var context = new UpdateUserCommandContext
+            {
+                User = user
+            };
+
+            context = await _commandBuilder.Execute(context);
+
+            return context.User.Id;
+        }
+
     }
 }
