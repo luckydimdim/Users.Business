@@ -27,7 +27,7 @@ namespace Cmas.BusinessLayers.Users
         /// <summary>
         /// Получить пользователя по логину
         /// </summary>
-        public async Task<User> GetUser(string login)
+        public async Task<User> GetUserByLogin(string login)
         {
             if (string.IsNullOrEmpty(login))
                 return null;
@@ -50,11 +50,14 @@ namespace Cmas.BusinessLayers.Users
         /// Создать пользователя
         /// </summary>
         /// <returns></returns>
-        public async Task<string> CreateUser()
+        public async Task<string> CreateUser(string login, string name, List<string> roles)
         {
             User user = new User();
 
             user.Id = null;
+            user.Login = login;
+            user.Name = name;
+            user.Roles = roles;
             user.UpdatedAt = DateTime.UtcNow;
             user.CreatedAt = DateTime.UtcNow;
 
